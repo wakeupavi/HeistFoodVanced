@@ -8,19 +8,20 @@ import { filteredRes } from "../utils/helper";
 import useOnline from "../utils/useOnline";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import CTAButton from "./Button/filterButton"
+import CTAButton from "./Button/filterButton";
+import {restaurants} from "../../config"
 
 //   https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.1119261&lng=79.0878065&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING
 
 const Body = () => {
   const [searchText, setsearchText] = useState("");
-  const [allRestaurant, setAllRestaurant] = useState([]);
+  const [allRestaurant, setAllRestaurant] = useState(restaurants);
   const [filterRestaurant, setFilterRestaurant] = useState([]);
 
-//  function submitSearch() {
-//     const data = filteredRes(searchText, allRestaurant);
-//     setFilterRestaurant(data);
-//   }
+  //  function submitSearch() {
+  //     const data = filteredRes(searchText, allRestaurant);
+  //     setFilterRestaurant(data);
+  //   }
 
   useEffect(() => {
     console.log("Use Effect called");
@@ -28,21 +29,29 @@ const Body = () => {
   }, []);
 
   async function getRestraurant() {
-    console.log("get res called")
+    console.log("get res called");
     const data = await fetch(RES_LIST_URL);
     const json = await data.json();
-    const resData= json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
-    ?.restaurants;
-   
+    const resData =
+      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants;
 
     console.log("All restau", resData);
-    setAllRestaurant(resData);
+    // setAllRestaurant(resData);
 
-    setFilterRestaurant(resData);
+    setFilterRestaurant((prev)=>prev+resData);
+    for(let i=0;i<resData.length;i++)
+    {
+      allRestaurant.push(resData[i])
+    }
+ 
     // console.log(i);
     console.log("Filter Res", filterRestaurant);
   }
 
+  // allRestaurant.pop();
+  console.log("printing restaurants", restaurants);
+ 
   const Online = useOnline();
   // console.log("online",isOnline)
 
@@ -57,70 +66,56 @@ const Body = () => {
     <Shimmer />
   ) : (
     // <h1>Loading</h1>
-    <div className="w-full bg-white flex justify-around relative">
-    {/* <div className="black-header w-full h-[500px] bg-black"></div> */}
-    <div className=" w-[1200px] h-[500px]  flex  mt-[100px]">
-      <div className="flex flex-col gap-4 ">
-        <h1 className="font-bold text-xl">Restaurants With Online Food Delivery In Bangalore</h1>
-        {/* buttons */}
+    <div className="w-full bg-white flex justify-around min-h-screen scroll ">
+      <div className=" w-[1200px] h-[500px]  flex  mt-[100px]">
+        <div className="flex flex-col gap-4 ">
+          <div className=" flex h-[10px] w-[1200px]  text-black "></div>
+          <h1 className="font-bold text-xl ml-3 ">
+            Restaurants With Online Food Delivery In Bangalore
+          </h1>
+          {/* buttons */}
 
-        <div className="flex gap-4">
-          <div className="w-fit">
-            <CTAButton active={true} linkto={"/signup"}>
-              <div className="flex items-center gap-3">
-                Fast Delivery
-              </div>
-            </CTAButton>
+          <div className="flex gap-4 mt-4 ml-5">
+            <div className="w-fit">
+              <CTAButton active={true} linkto={"/signup"}>
+                <div className="flex items-center gap-3">Fast Delivery</div>
+              </CTAButton>
+            </div>
+            <div className="w-fit">
+              <CTAButton active={true} linkto={"/signup"}>
+                <div className="flex items-center gap-3">Price</div>
+              </CTAButton>
+            </div>
+            <div className="w-fit">
+              <CTAButton active={true} linkto={"/signup"}>
+                <div className="flex items-center gap-3">Rating</div>
+              </CTAButton>
+            </div>
+            <div className="w-fit">
+              <CTAButton active={true} linkto={"/signup"}>
+                <div className="flex items-center gap-3">Rs.300-Rs.400</div>
+              </CTAButton>
+            </div>
+            <div className="w-fit">
+              <CTAButton active={true} linkto={"/signup"}>
+                <div className="flex items-center gap-3">Less than Rs.300</div>
+              </CTAButton>
+            </div>
           </div>
-          <div className="w-fit">
-            <CTAButton active={true} linkto={"/signup"}>
-              <div className="flex items-center gap-3">
-                Price
-              </div>
-            </CTAButton>
-          </div>
-          <div className="w-fit">
-            <CTAButton active={true} linkto={"/signup"}>
-              <div className="flex items-center gap-3">
-                Rating
-              </div>
-            </CTAButton>
-          </div>
-          <div className="w-fit">
-            <CTAButton active={true} linkto={"/signup"}>
-              <div className="flex items-center gap-3">
-                Rs.300-Rs.400
-              </div>
-            </CTAButton>
-          </div>
-          <div className="w-fit">
-            <CTAButton active={true} linkto={"/signup"}>
-              <div className="flex items-center gap-3">
-                Less than Rs.300
-              </div>
-            </CTAButton>
+
+          {/* Restaurant card */}
+          <div className="flex  flex-wrap">
+            {allRestaurant?.map((restaurant, index) => {
+              return <Link  to={"/restaurant/" + restaurant.info.id} key={restaurant.info.id}><RestaurantCard {...restaurant.info} key={index} /></Link>;
+            })}
           </div>
         </div>
-
-        {/* Restaurant card */}
-       
       </div>
     </div>
-  </div>
-    
   );
 };
 
 export default Body;
-
-
-
-
-
-
-
-
-
 
 // <div className="mt-10 mr-[100px] ml-[100px]  flex flex-col  items-center  ">
 //       <div className="flex bg-white p-4 border w-[450px] border-red-300 rounded-xl justify-center z-10 sticky top-[90]  gap-2">

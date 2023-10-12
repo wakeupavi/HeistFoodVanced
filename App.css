@@ -7,7 +7,42 @@
     height: 0px;
     
   } */
+  .header {
+    box-shadow: 0 15px 40px -20px rgba(40, 44, 63, 0.15);
+    /* position: fixed; */
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: #fff;
+    z-index: 1000; 
+    will-change: transform;
+     transform: translateZ(0); 
+    transition: transform 0.3s ease;
+    /* contain: size layout style; */
+    /* padding: 0 20px; */
+  }
+  .text-dec{
+    color: #3d4152;
+    font-size: 16px;
+    font-weight: 500;
+  
+  }
+  .footer{
+    box-shadow: 0 15px 40px -20px rgba(40, 44, 63, 0.15);
+    /* position: fixed; */
+    /* position: sticky; */
+    /* top: 800px; */
+    /* display: block; */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+   
+  }
 
+
+/* 
   @layer utilities {
     .scrollbar::-webkit-scrollbar {
       width: 0px;
@@ -34,4 +69,4 @@
 
     border: #9b0c0c;
 
-  }
+  } */

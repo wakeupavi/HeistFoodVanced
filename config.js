@@ -16,7 +16,7 @@ export const RES_LIST_URL="https://www.swiggy.com/dapi/restaurants/list/v5?lat=1
 export const Menu_Api="https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=25.5941&lng=85.1376&restaurantId=";
 
 
-const restaurants= [
+ export const restaurants= [
     {
     "info": {
     "id": "74453",

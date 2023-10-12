@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Header from "./components/Header";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
+// import Footer from "./components/babbarFooter";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import About from "./components/About";
 import ErrorPage from "./components/ErrorPage";
@@ -21,6 +22,7 @@ import { Suspense, lazy } from "react";
 import {Provider} from "react-redux"
 import store from "./utils/store";
 import Cart from "./components/Cart";
+import SearchBar from "./components/SearchBar";
 // import Shimmer from "./components/Shimmer";
 
 /**
@@ -38,15 +40,11 @@ const Instamart = lazy(() => import("./components/Instamart"));
 
 const AppLayout = () => (
   <Provider store={store}>
-    <>
+    <div className="">
     <Header />
-  
-    
     <Outlet />
-
-    {/* <Body /> */}
-    <Footer />
-  </>
+    {/* <Footer /> */}
+  </div>
 <ToastContainer/>
 
   </Provider>
@@ -71,6 +69,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/contact",
         element: <ContactUsPage />,
+      },
+      {
+        path: "/search",
+        element: <SearchBar />,
       },
       {
         path: "/",
