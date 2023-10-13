@@ -41,7 +41,10 @@
    
   }
 
-
+.on-hover:hover{
+  color: #E85B12;
+  transition: all 4ms;
+}
 /* 
   @layer utilities {
     .scrollbar::-webkit-scrollbar {

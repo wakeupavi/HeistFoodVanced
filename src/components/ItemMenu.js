@@ -71,7 +71,7 @@ const dispatch=useDispatch();
             </div>
           </div>
         </div>
-        <div className="w-[670px] flex justify-between h-[2px] mt-6 bg-gray-800"></div>
+        <div className="w-[800px]    h-[3px] bg-[#d3d3df]"></div>
       </div>
     );
 

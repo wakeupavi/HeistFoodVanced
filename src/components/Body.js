@@ -3,61 +3,74 @@ import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { RES_LIST_URL } from "../../config";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { filteredRes } from "../utils/helper";
 import useOnline from "../utils/useOnline";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import CTAButton from "./Button/filterButton";
 import {restaurants} from "../../config"
+import { useDispatch, useSelector } from "react-redux";
+import { addRestaurants } from "../utils/Slices/AllRestaurantSlics";
+// import {  toast } from 'react-hot-toast';
+import {  toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 //   https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.1119261&lng=79.0878065&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING
 
 const Body = () => {
   const [searchText, setsearchText] = useState("");
-  const [allRestaurant, setAllRestaurant] = useState(restaurants);
-  const [filterRestaurant, setFilterRestaurant] = useState([]);
+  // const [allRestaurant, setAllRestaurant] = useState(restaurants);
+  // const [filterRestaurant, setFilterRestaurant] = useState([]);
 
-  //  function submitSearch() {
-  //     const data = filteredRes(searchText, allRestaurant);
-  //     setFilterRestaurant(data);
-  //   }
+  // const CartItems = useSelector((store) => store.cart.items);
+
+  let allRestaurant=useSelector((store)=>store.allRest.AllRestItems);
+  const dispatch=useDispatch();
+
 
   useEffect(() => {
     console.log("Use Effect called");
     getRestraurant();
   }, []);
 
+
   async function getRestraurant() {
+   try{
     console.log("get res called");
     const data = await fetch(RES_LIST_URL);
     const json = await data.json();
     const resData =
-      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants;
 
-    console.log("All restau", resData);
-    // setAllRestaurant(resData);
+    allRestaurant=allRestaurant.concat(resData)
+    dispatch(addRestaurants(allRestaurant));
+    toast.success("API Fetched Successfully", {
+      position: toast.POSITION.TOP_RIGHT
+  })
 
-    setFilterRestaurant((prev)=>prev+resData);
-    for(let i=0;i<resData.length;i++)
-    {
-      allRestaurant.push(resData[i])
-    }
- 
-    // console.log(i);
-    console.log("Filter Res", filterRestaurant);
-  }
 
-  // allRestaurant.pop();
-  console.log("printing restaurants", restaurants);
- 
-  const Online = useOnline();
+    console.log("fetched  restau", resData);
+    console.log("All restau",allRestaurant)
+   }catch(error){
+    console.error("Fetch error");
+    toast.error("Trouble in Fetching API", {
+      position: toast.POSITION.TOP_RIGHT
+  })
+    toast.info("Rendering  Prefetched ", {
+      position: toast.POSITION.TOP_RIGHT
+  })
+
+  }}
+
+  // const Online = useOnline();
   // console.log("online",isOnline)
 
-  if (!Online) return <h1>You are offline</h1>;
+  // if (!Online) return <h1>You are offline</h1>;
 
-  if (!allRestaurant) return <h1>API Changes Refresh it</h1>;
+  // if (!allRestaurant) return <h1>API Changes Refresh it</h1>;
 
   console.log("render from body.js");
 
@@ -66,7 +79,7 @@ const Body = () => {
     <Shimmer />
   ) : (
     // <h1>Loading</h1>
-    <div className="w-full bg-white flex justify-around min-h-screen scroll ">
+    <div className="w-full  bg-white flex justify-around min-h-screen scroll ">
       <div className=" w-[1200px] h-[500px]  flex  mt-[100px]">
         <div className="flex flex-col gap-4 ">
           <div className=" flex h-[10px] w-[1200px]  text-black "></div>
@@ -104,9 +117,9 @@ const Body = () => {
           </div>
 
           {/* Restaurant card */}
-          <div className="flex  flex-wrap">
-            {allRestaurant?.map((restaurant, index) => {
-              return <Link  to={"/restaurant/" + restaurant.info.id} key={restaurant.info.id}><RestaurantCard {...restaurant.info} key={index} /></Link>;
+          <div className="flex ml-7  flex-wrap">
+            {allRestaurant.map((restaurant, index) => {
+              return <Link  to={"/restaurant/" + restaurant?.info?.id} key={index}><RestaurantCard {...restaurant?.info}/></Link>;
             })}
           </div>
         </div>
