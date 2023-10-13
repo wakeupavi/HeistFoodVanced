@@ -18,7 +18,7 @@ const RestrauMenu = () => {
   return !restaurant ? (
     <Shimmer />
   ) : (
-    <div className="flex flex-col mt-[80px] w-[800px] mx-auto">
+    <div className="flex flex-col mt-[80px] w-[800px] mx-auto mb-[100px]">
       <div className="flex w-[800px] justify-between ">
         <div className="flex flex-col">
           <h1 className="text-[#282C3F]  text-[20px] font-sans font-[600]">
@@ -37,12 +37,12 @@ const RestrauMenu = () => {
             delivery fee will apply
           </h1>
         </div>
-        <div className="flex flex-col w-[80px] p-[6px] h-[70px] justify-between items-center border-2 border-[#5151dc] shadow-[#f9f9f9] text-center rounded-[6px]">
+        <div className="flex flex-col w-[80px] p-[6px]  h-[70px] justify-between items-center border-2 border-gray-300 shadow-[#f9f9f9] text-center rounded-[6px]">
           <div
-            className="flex font-[400] gap-1 text-green-700 items-center
+            className="flex font-[400] translate-y-[-4px] translate-x-[-2px] text-green-700 items-center
              "
           >
-            <GrStar />
+            <div className="mt-2"><GrStar /></div>
             <h1 className="font-bold mt-2">{restaurant?.avgRating}</h1>
           </div>
           <h1 className="w-full h-[1px] bg-slate-800"></h1>

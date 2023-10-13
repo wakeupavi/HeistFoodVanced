@@ -4,7 +4,7 @@ import AppleLogo from "../assets/Apple.jpg";
 
 const Footer = () => {
   return (
-    <div className="footer bg-gray-100 flex flex-col   ">
+    <div className=" bg-gray-100 flex flex-col  bottom-0 left-0 w-full  ">
       <div className="flex justify-between p-4 mr-10 ml-10">
         <div className="text-[30px] w-[40vw] font-extrabold">
           For better experience ,download the Heist INN app now

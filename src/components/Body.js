@@ -79,8 +79,9 @@ const Body = () => {
     <Shimmer />
   ) : (
     // <h1>Loading</h1>
-    <div className="w-full  bg-white flex justify-around min-h-screen scroll ">
-      <div className=" w-[1200px] h-[500px]  flex  mt-[100px]">
+    <div className="w-full   bg-white flex justify-around min-h-screen scroll ">
+      {/* <h1 className="text-[100px] flex z-10 text-black">Hello</h1> */}
+      <div className=" w-[1200px]   h-[500px]  flex  mt-[100px]">
         <div className="flex flex-col gap-4 ">
           <div className=" flex h-[10px] w-[1200px]  text-black "></div>
           <h1 className="font-bold text-xl ml-3 ">
@@ -124,6 +125,8 @@ const Body = () => {
           </div>
         </div>
       </div>
+      {/* footer */}
+      
     </div>
   );
 };

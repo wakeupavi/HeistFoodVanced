@@ -2,6 +2,7 @@ import { CgSquare } from "react-icons/cg";
 import { IMG_CDN_URL } from "../../config";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, removeItem } from "../utils/Slices/cartSlice";
+import {Logo} from "../assets/HeistINN.png"
 
 import {  toast } from 'react-toastify';
 
@@ -20,7 +21,7 @@ const dispatch=useDispatch();
   }
   const removeFoodItem=(item)=>{
   dispatch(removeItem());
-  toast.error("Item removed from Cart", {
+  toast.info("Item removed from Cart", {
     position: toast.POSITION.TOP_RIGHT
 })
   }
@@ -62,9 +63,9 @@ const dispatch=useDispatch();
           <div className="flex flex-col items-center relative">
             {/* image */}
             <div className=" w-[150px] max-h-[20px] mb-[130px] rounded-md">
-              <img className=" rounded-xl" src={IMG_CDN_URL + item?.card?.info?.imageId}></img>
+              <img className=" rounded-xl w-[200px] h-[100px]" alt="Item Image" src={IMG_CDN_URL + item?.card?.info?.imageId}></img>
             </div>
-            <div className="gap-2 -translate-y-[20px] flex">
+            <div className="gap-2 -translate-y-[70px] flex">
               <button onClick={()=>removeFoodItem(item)} className="bg-orange-500  rounded-md p-1 w-17">Remove</button>
               <button onClick={()=>AddFoodItem(item)} className="bg-green-500 rounded-md p-1 w-17">Add</button>
           

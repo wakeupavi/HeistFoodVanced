@@ -23,6 +23,9 @@ import {Provider} from "react-redux"
 import store from "./utils/store";
 import Cart from "./components/Cart";
 import SearchBar from "./components/SearchBar";
+// import { useSelector,useDispatch } from "react-redux";
+// import {setModal} from "./utils/Slices/ShowModal";
+// import AuthModal from "./components/AuthModal";
 // import Shimmer from "./components/Shimmer";
 
 /**
@@ -34,21 +37,30 @@ import SearchBar from "./components/SearchBar";
  * Dynamic import
  */
 
+// const showModal=useSelector((store)=>store.modal.showModal)
+// const dispatch=useDispatch();
+
+// console.log("ShowModel",showModal)
+
 const Instamart = lazy(() => import("./components/Instamart"));
 // Upon On Demand Laoding -->Upon render-->Suspend Loading
 // never lazy load inside component because it will lazy load after evry cycle/render
 
 const AppLayout = () => (
+  
   <Provider store={store}>
     <div className="">
     <Header />
-    <Outlet />
+  
+   <Outlet />
     {/* <Footer /> */}
   </div>
 <ToastContainer/>
 
   </Provider>
 );
+
+
 
 const appRouter = createBrowserRouter([
   {
@@ -97,12 +109,12 @@ const appRouter = createBrowserRouter([
       }
     ],
   },
+
+  
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-// root.render(heading);
-// root.render(title);
-// root.render(<AppLayout/>);
-root.render(<RouterProvider router={appRouter} />);
+// root.render(<AppLayout/>)
+root.render((<RouterProvider router={appRouter} />));
 
 // The colon (:) is used to specify a placeholder for a dynamic value in the URL. When a user navigates to a URL that matches this route pattern, the actual value that matches :resId will be extracted from the URL and made available as a parameter in your route handler or component. You can access this parameter using the route's props

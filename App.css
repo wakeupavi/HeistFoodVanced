@@ -45,6 +45,17 @@
   color: #E85B12;
   transition: all 4ms;
 }
+
+.container{
+  position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+  background-color: rgb(224, 218, 218);
+  /* opacity: 0.5; */
+}
+
 /* 
   @layer utilities {
     .scrollbar::-webkit-scrollbar {
