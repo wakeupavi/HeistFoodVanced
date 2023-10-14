@@ -25,7 +25,7 @@ import Cart from "./components/Cart";
 import SearchBar from "./components/SearchBar";
 // import { useSelector,useDispatch } from "react-redux";
 // import {setModal} from "./utils/Slices/ShowModal";
-// import AuthModal from "./components/AuthModal";
+import AuthModal from "./components/AuthModal";
 // import Shimmer from "./components/Shimmer";
 
 /**
@@ -81,6 +81,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/contact",
         element: <ContactUsPage />,
+      },
+      {
+        path: "/login",
+        element: <AuthModal/>,
       },
       {
         path: "/search",

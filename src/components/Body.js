@@ -1,33 +1,28 @@
-// import restaurants from "../../config";
+
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { RES_LIST_URL } from "../../config";
-import { Link} from "react-router-dom";
-import { filteredRes } from "../utils/helper";
-import useOnline from "../utils/useOnline";
-import { AiOutlineSearch } from "react-icons/ai";
-import { FaMapMarkerAlt } from "react-icons/fa";
-import CTAButton from "./Button/filterButton";
-import {restaurants} from "../../config"
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addRestaurants } from "../utils/Slices/AllRestaurantSlics";
-// import {  toast } from 'react-hot-toast';
-import {  toast } from 'react-toastify';
+import { addRestaurants,filtOnDelTime,filtByRating,filtByCostByTwo } from "../utils/Slices/AllRestaurantSlics";
+import { toast } from "react-toastify";
+import useOnline from "../utils/useOnline";
+// import { filterOnDeliveryTime } from "../utils/helper";
 
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 //   https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.1119261&lng=79.0878065&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING
 
 const Body = () => {
-  const [searchText, setsearchText] = useState("");
-  // const [allRestaurant, setAllRestaurant] = useState(restaurants);
-  // const [filterRestaurant, setFilterRestaurant] = useState([]);
+ 
 
-  // const CartItems = useSelector((store) => store.cart.items);
+  let allRestaurant = useSelector((store) => store.allRest.AllRestItems);
+  const dispatch = useDispatch();
 
-  let allRestaurant=useSelector((store)=>store.allRest.AllRestItems);
-  const dispatch=useDispatch();
+    
+
+
 
 
   useEffect(() => {
@@ -35,44 +30,44 @@ const Body = () => {
     getRestraurant();
   }, []);
 
-
   async function getRestraurant() {
-   try{
-    console.log("get res called");
-    const data = await fetch(RES_LIST_URL);
-    const json = await data.json();
-    const resData =
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants;
+    try {
+      console.log("get res called");
+      const data = await fetch(RES_LIST_URL);
+      const json = await data.json();
+      const resData =
+        json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants;
 
-    allRestaurant=allRestaurant.concat(resData)
-    dispatch(addRestaurants(allRestaurant));
-    toast.success("API Fetched Successfully", {
-      position: toast.POSITION.TOP_RIGHT
-  })
+      allRestaurant = allRestaurant.concat(resData);
+      dispatch(addRestaurants(allRestaurant));
+      toast.success("API Fetched Successfully", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
 
+      console.log("Printing jsom ",json);
+      console.log("fetched  restau", resData);
+      console.log("All restau", allRestaurant);
+    } catch (error) {
+      console.error("Fetch error");
+      toast.error("Trouble in Fetching API", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      toast.info("Rendering  Prefetched ", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  }
 
-    console.log("fetched  restau", resData);
-    console.log("All restau",allRestaurant)
-   }catch(error){
-    console.error("Fetch error");
-    toast.error("Trouble in Fetching API", {
-      position: toast.POSITION.TOP_RIGHT
-  })
-    toast.info("Rendering  Prefetched ", {
-      position: toast.POSITION.TOP_RIGHT
-  })
-
-  }}
-
-  // const Online = useOnline();
+  const Online = useOnline();
   // console.log("online",isOnline)
 
-  // if (!Online) return <h1>You are offline</h1>;
+  if (!Online) return <h1>You are offline</h1>;
 
-  // if (!allRestaurant) return <h1>API Changes Refresh it</h1>;
+
 
   console.log("render from body.js");
+  console.log("All restau", allRestaurant);
 
   // Conditional Rendering
   return allRestaurant?.length === 0 ? (
@@ -91,42 +86,65 @@ const Body = () => {
 
           <div className="flex gap-4 mt-4 ml-5">
             <div className="w-fit">
-              <CTAButton active={true} linkto={"/signup"}>
-                <div className="flex items-center gap-3">Fast Delivery</div>
-              </CTAButton>
+              <button
+                className={`text-center items-center flex p-3 text-[13px] sm:text-[16px] px-6 py- rounded-full h-[30px] border-gray-300 border-[1px] 
+          bg-gray-50 text-black 
+      hover:shadow-none hover:scale-95 transition-all duration-200 `}
+              >
+                <div onClick={()=>dispatch(filtOnDelTime())} className="flex items-center gap-3">Fast Delivery</div>
+              </button>
             </div>
             <div className="w-fit">
-              <CTAButton active={true} linkto={"/signup"}>
+              {/* <button
+                className={`text-center items-center flex p-3 text-[13px] sm:text-[16px] px-6 py- rounded-full h-[30px] border-gray-300 border-[1px] 
+          bg-gray-50 text-black 
+      hover:shadow-none hover:scale-95 transition-all duration-200 `}
+              >
                 <div className="flex items-center gap-3">Price</div>
-              </CTAButton>
+              </button> */}
             </div>
             <div className="w-fit">
-              <CTAButton active={true} linkto={"/signup"}>
+              <button onClick={()=>dispatch(filtByRating())} 
+                className={`text-center items-center flex p-3 text-[13px] sm:text-[16px] px-6 py- rounded-full h-[30px] border-gray-300 border-[1px] 
+          bg-gray-50 text-black 
+      hover:shadow-none hover:scale-95 transition-all duration-200 `}
+              >
                 <div className="flex items-center gap-3">Rating</div>
-              </CTAButton>
+              </button>
             </div>
             <div className="w-fit">
-              <CTAButton active={true} linkto={"/signup"}>
-                <div className="flex items-center gap-3">Rs.300-Rs.400</div>
-              </CTAButton>
+              <button onClick={()=>dispatch(filtByCostByTwo())} 
+                className={`text-center items-center flex p-3 text-[13px] sm:text-[16px] px-6 py- rounded-full h-[30px] border-gray-300 border-[1px] 
+          bg-gray-50 text-black 
+      hover:shadow-none hover:scale-95 transition-all duration-200 `}
+              >
+                <div className="flex items-center gap-3">Cost For Two</div>
+              </button>
             </div>
-            <div className="w-fit">
-              <CTAButton active={true} linkto={"/signup"}>
+            {/* <div className="w-fit">
+              <button
+                className={`text-center items-center flex p-3 text-[13px] sm:text-[16px] px-6 py- rounded-full h-[30px] border-gray-300 border-[1px] 
+          bg-gray-50 text-black 
+      hover:shadow-none hover:scale-95 transition-all duration-200 `}
+              >
                 <div className="flex items-center gap-3">Less than Rs.300</div>
-              </CTAButton>
-            </div>
+              </button>
+            </div> */}
           </div>
 
           {/* Restaurant card */}
           <div className="flex ml-7  flex-wrap">
             {allRestaurant.map((restaurant, index) => {
-              return <Link  to={"/restaurant/" + restaurant?.info?.id} key={index}><RestaurantCard {...restaurant?.info}/></Link>;
+              return (
+                <Link to={"/restaurant/" + restaurant?.info?.id} key={index}>
+                  <RestaurantCard {...restaurant?.info} />
+                </Link>
+              );
             })}
           </div>
         </div>
       </div>
       {/* footer */}
-      
     </div>
   );
 };

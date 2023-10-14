@@ -29,8 +29,10 @@ const RestaurantCard = (props) => {
           <div className="text-green-600">
             <AiFillStar />
           </div>
-          <h3>{props?.avgRatingString}</h3>
+          <h3 >{props?.avgRatingString}</h3>
+          <h3>{props?.sla?.slaString}</h3>
         </div>
+        <h1 className="text-black mt-2 ml-2 w-64 flex flex-wrap font-bold italic">{props?.costForTwo}</h1>
         <h3 className="text-gray-600 ml-2 flex w-64 flex-wrap font-sans italic ">
           {props?.cuisines?.join(", ")}
         </h3>

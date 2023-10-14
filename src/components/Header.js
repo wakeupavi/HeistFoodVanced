@@ -14,16 +14,17 @@ const Header = () => {
 
   console.log("ShowModel",showModal)
 
-  // const  CartItems = useSelector((store) => store.cart.items);
-  const CartItems = ["Apple"];
+  const  CartItems = useSelector((store) => store.cart.items);
+  // const CartItems = ["Apple"];
   return (
     //  top level div
     <>
-    {showModal&&<AuthModal/>}
-    <div className="w-full sticky top-0 flex z-10 ">
+   
+ 
+    <div className="w-full  sticky top-0 flex z-10 ">
       <div className="header w-full sticky top-0 flex  justify-center ">
         <div className="w-[1200px] flex justify-between items-center">
-          <div className="flex  ">
+          <div className ="flex  ">
             <Link to="/">
               <img
                 className="hover:scale-[1.05] transition-all 3ms"
@@ -55,15 +56,17 @@ const Header = () => {
                 <li className="on-hover">Contact Us</li>
               </Link>
             
-                <li  onClick={() => dispatch(setModal(true))} className="">
+                <Link to="/login">
+                <li   className="">
                   <div className=" on-hover  flex gap-1">
                     <div className=" text-2xl font-light">
                       <CgProfile />
                     </div>
-                    <span className="">Sign In</span>
+                    <span  className="">Sign In</span>
                     
                   </div>
                 </li>
+                </Link>
              
               <Link to="/cart">
                 <li className=" on-hover ">

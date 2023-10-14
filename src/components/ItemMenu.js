@@ -60,12 +60,12 @@ const dispatch=useDispatch();
           </div>
 
           {/* image and button */}
-          <div className="flex flex-col items-center relative">
+          <div className="flex  flex-col items-center ">
             {/* image */}
-            <div className=" w-[150px] max-h-[20px] mb-[130px] rounded-md">
+            <div className=" w-[150px] max-h-[20px] mb-[130px]  rounded-md">
               <img className=" rounded-xl w-[200px] h-[100px]" alt="Item Image" src={IMG_CDN_URL + item?.card?.info?.imageId}></img>
             </div>
-            <div className="gap-2 -translate-y-[70px] flex">
+            <div className="gap-2 -translate-y-[70px]  flex">
               <button onClick={()=>removeFoodItem(item)} className="bg-orange-500  rounded-md p-1 w-17">Remove</button>
               <button onClick={()=>AddFoodItem(item)} className="bg-green-500 rounded-md p-1 w-17">Add</button>
           
