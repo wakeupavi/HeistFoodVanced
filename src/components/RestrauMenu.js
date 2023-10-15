@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import { IMG_CDN_URL } from "../../config";
 import Shimmer from "./Shimmer";
 import { useRestaurant } from "../utils/useRestaurant";
 import { useState } from "react";
@@ -18,7 +17,7 @@ const RestrauMenu = () => {
   return !restaurant ? (
     <Shimmer />
   ) : (
-    <div className="flex flex-col mt-[80px] w-[800px] mx-auto mb-[100px]">
+    <div className="flex flex-col mt-[100px] w-[800px] mx-auto mb-[100px]">
       <div className="flex w-[800px] justify-between ">
         <div className="flex flex-col">
           <h1 className="text-[#282C3F]  text-[20px] font-sans font-[600]">
@@ -42,7 +41,9 @@ const RestrauMenu = () => {
             className="flex font-[400] translate-y-[-4px] translate-x-[-2px] text-green-700 items-center
              "
           >
-            <div className="mt-2"><GrStar /></div>
+            <div className="mt-2">
+              <GrStar />
+            </div>
             <h1 className="font-bold mt-2">{restaurant?.avgRating}</h1>
           </div>
           <h1 className="w-full h-[1px] bg-slate-800"></h1>
@@ -91,14 +92,16 @@ const RestrauMenu = () => {
                       {cate?.card?.card?.title?.length}
                       {")"}
                     </button>
-                    <button  onClick={() => {
+                    <button
+                      onClick={() => {
                         show ? setShow(false) : setShow(true);
-                      }} className="absolute rounded-md p-[2px] text-gray-700  -translate-x-[20px] ml-[760px] mt-1 flex justify-center items-center">
+                      }}
+                      className="absolute rounded-md p-[2px] text-gray-700  -translate-x-[20px] ml-[760px] mt-1 flex justify-center items-center"
+                    >
                       {!show ? <BiSolidDownArrow /> : <BiSolidUpArrow />}
                     </button>
                   </div>
                   <div className="w-[800px]    h-[15px] bg-[#F1F1F6]"></div>
-
 
                   {show && <ItemMenu itemCard={cate?.card?.card?.itemCards} />}
                 </div>
@@ -112,25 +115,3 @@ const RestrauMenu = () => {
 };
 
 export default RestrauMenu;
-
-// within return
-// <li key={index}>
-// <h1 className=" text-3xl font-bold">{cate?.card?.card?.title}</h1>
-// {cate?.card?.card?.itemCards.map((item, index) => {
-//   return (
-//     <div key={index}>
-//       <span>
-//         <h2 className="font-bold">{item?.card?.info?.name}</h2>
-//       </span>
-//       <span>
-//         {" "}
-//         - ₹
-//         {item?.card?.info?.price
-//           ? item?.card?.info?.price / 100
-//           : item?.card?.info?.defaultPrice / 100}
-//       </span>
-//       <p>{`${item?.card?.info?.description}`}</p>
-//     </div>
-//   );
-// })}
-// </li>

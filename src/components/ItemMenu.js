@@ -81,33 +81,3 @@ const dispatch=useDispatch();
 };
 
 export default ItemMenu;
-
-// {cate?.card?.card?.itemCards.map((item, index) => {
-//   return (
-//     <div key={index}>
-//       <span>
-//         <h2 className="font-bold">{item?.card?.info?.name}</h2>
-//       </span>
-//       <span>
-//         {" "}
-//         - ₹
-//         {item?.card?.info?.price
-
-//           : item?.card?.info?.defaultPrice / 100}
-//       </span>
-//       <p>{`${item?.card?.info?.description}`}</p>
-
-/**
- *  <span>
-          <h2 className="font-bold">{item?.card?.info?.name}</h2>
-        </span>
-        <span>
-          {" "}
-          - ₹
-          {item?.card?.info?.price
-            ? item?.card?.info?.price / 100
-            : item?.card?.info?.defaultPrice / 100}
-        </span>
-        <p>{`${item?.card?.info?.description}`}</p>
-        <div className="w-[600px] h-[2px] bg-gray-800"></div>
- */

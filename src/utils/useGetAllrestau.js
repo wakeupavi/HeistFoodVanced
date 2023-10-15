@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react"
-// import { RES_LIST_URL } from "../../config"
-
 
 export const useGetAllrestau=(RES_LIST_URL)=>{
 

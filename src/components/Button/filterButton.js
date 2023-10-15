@@ -2,7 +2,7 @@
 import React from "react";
 // import { Link } from "react-router-dom";
 
-const filterButton = ({ children, active, linkto }) => {
+const filterButton = () => {
   return (
     <a href={linkto}>
       <div

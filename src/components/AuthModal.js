@@ -89,13 +89,6 @@ const AuthModal = () => {
          </div>
        )}
 
-       {/* Action buttons */}
-       {/* <div className="mb-4">
-         <button className="bg-blue-500 text-black p-2 w-full rounded">
-           {isSignUp ? "Sign Up" : "Login"}
-         </button>
-       </div> */}
-
        <button   onClick={()=>SignUp()} className="w-full bg-blue-500 rounded-md text-white text-center">
         <div className="  m-1">{isSignUp ? <h1>Sign Up</h1> : <h1>login</h1>}</div>
        </button>

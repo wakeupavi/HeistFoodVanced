@@ -19,7 +19,7 @@ const Header = () => {
   return (
     //  top level div
     <>
-   
+    {/* {showModal&&<AuthModal/>} */}
  
     <div className="w-full  sticky top-0 flex z-10 ">
       <div className="header w-full sticky top-0 flex  justify-center ">
