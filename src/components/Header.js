@@ -15,14 +15,15 @@ const Header = () => {
   console.log("ShowModel",showModal)
 
   const  CartItems = useSelector((store) => store.cart.items);
+  const User = useSelector((store) => store.user.user);
   // const CartItems = ["Apple"];
   return (
     //  top level div
     <>
-    {/* {showModal&&<AuthModal/>} */}
+  
  
-    <div className="w-full  sticky top-0 flex z-10 ">
-      <div className="header w-full sticky top-0 flex  justify-center ">
+    <div className="w-full  fixed top-0 flex z-10 ">
+      <div className="header w-full  flex  justify-center ">
         <div className="w-[1200px] flex justify-between items-center">
           <div className ="flex  ">
             <Link to="/">
@@ -56,17 +57,18 @@ const Header = () => {
                 <li className="on-hover">Contact Us</li>
               </Link>
             
-                <Link to="/login">
+               
                 <li   className="">
-                  <div className=" on-hover  flex gap-1">
+                  <Link to="/signIn">
+                  <div  className=" on-hover  flex gap-1">
                     <div className=" text-2xl font-light">
                       <CgProfile />
                     </div>
-                    <span  className="">Sign In</span>
+                    <span  className="">{(User=="")?(<spna>Sign In</spna>):(<div className="text-orange-400 flex bg-black h-[23px] min-w-[50px] p-[8px] max-w-[250px] mx-auto items-center justify-center  rounded-xl">{User}</div>)}</span>
                     
-                  </div>
+                  </div></Link>
                 </li>
-                </Link>
+              
              
               <Link to="/cart">
                 <li className=" on-hover ">

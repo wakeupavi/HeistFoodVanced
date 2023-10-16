@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import { useRestaurant } from "../utils/useRestaurant";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ItemMenu from "./ItemMenu";
 import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
 import { GrStar } from "react-icons/gr";
@@ -9,9 +9,44 @@ import { HiClock, HiOutlineCurrencyRupee } from "react-icons/hi";
 
 const RestrauMenu = () => {
   const { resId } = useParams();
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
 
   const { restaurant, category } = useRestaurant(resId);
+
+  const catLength = category.length;
+
+  // let array = [];
+  // useEffect(() => {
+  //   function createArray() {
+  //     array = new Array(catLength).fill(true);
+  //   }
+  // }, []);
+
+  // const array=new Array(catLength).fill(false);
+  const array = [];
+  for (let i = 0; i < catLength; i++) {
+    array[i] = false;
+  }
+
+  console.log(array);
+  const [arr, setArr] = useState(array);
+  // arr[0] = true;
+  console.log("Printing arrList", arr);
+
+  function toggleIndex(index) {
+    // const updatedArr = Array(catLength).fill(true);
+    // updatedArr[index] = false;
+    // setArr(updatedArr);
+
+    if (arr[index] === false) {
+      const updatedArr = Array(catLength).fill(false);
+      updatedArr[index] = true;
+      setArr(updatedArr);
+    } else {
+      const updatedArr = Array(catLength).fill(false);
+      setArr(updatedArr);
+    }
+  }
 
   //   console.log(params);
   return !restaurant ? (
@@ -72,19 +107,19 @@ const RestrauMenu = () => {
       {/* line */}
       <div className="w-[800px] mt-6  border-dotted border[1.5px] h-[1px] bg-[#7e808c]"></div>
 
-      <div className="flex mt-[50px] ">
+      <div className="flex  mt-[50px] ">
         <div className="">
           <ul>
             {category?.map((cate, index) => {
               return (
-                <div className=" max-w-[800px] ">
+                <div className="relative max-w-[800px] ">
                   <div
                     className="m-6 flex -mb-[2px]  max-w-[800px] relative "
                     key={index}
                   >
                     <button
                       onClick={() => {
-                        show ? setShow(false) : setShow(true);
+                        toggleIndex(index);
                       }}
                       className=" text-[18px] font-[800] font-sans text-[#3e4152]  flex    h-[40px]  w-[800px]  "
                     >
@@ -94,16 +129,20 @@ const RestrauMenu = () => {
                     </button>
                     <button
                       onClick={() => {
-                        show ? setShow(false) : setShow(true);
+                        toggleIndex(index);
                       }}
                       className="absolute rounded-md p-[2px] text-gray-700  -translate-x-[20px] ml-[760px] mt-1 flex justify-center items-center"
                     >
-                      {!show ? <BiSolidDownArrow /> : <BiSolidUpArrow />}
+                      {!arr[index] ? <BiSolidDownArrow /> : <BiSolidUpArrow />}
                     </button>
                   </div>
                   <div className="w-[800px]    h-[15px] bg-[#F1F1F6]"></div>
 
-                  {show && <ItemMenu itemCard={cate?.card?.card?.itemCards} />}
+                 
+                    {arr[index] && (
+                      <ItemMenu itemCard={cate?.card?.card?.itemCards} />
+                    )}
+          
                 </div>
               );
             })}
@@ -115,3 +154,15 @@ const RestrauMenu = () => {
 };
 
 export default RestrauMenu;
+
+// console.log("toggleIndex Called from RestrauMenu.js",index)
+
+// if(arr[index]===false){
+//   console.log("printing index value",arr[index])
+//   arr.fill(false);
+//   arr[index]=true;
+// }else{
+//   arr.fill(false);
+// }
+
+// }

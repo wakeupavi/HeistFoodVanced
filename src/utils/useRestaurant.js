@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // custom  hook
 export const useRestaurant = (resId) => {
-  const [category, setCategory] = useState(null);
+  const [category, setCategory] = useState([]);
   const [restaurant, setRestaurant] = useState(null);
 
   // get data from api

@@ -26,6 +26,9 @@ import SearchBar from "./components/SearchBar";
 // import { useSelector,useDispatch } from "react-redux";
 // import {setModal} from "./utils/Slices/ShowModal";
 import AuthModal from "./components/AuthModal";
+import SignUp from "./components/SignUp";
+import Login from "./components/Login";
+import LandingPage from "./components/LandingPage";
 // import Shimmer from "./components/Shimmer";
 
 /**
@@ -53,6 +56,7 @@ const AppLayout = () => (
     <Header />
   
    <Outlet />
+
     {/* <Footer /> */}
   </div>
 <ToastContainer/>
@@ -83,6 +87,14 @@ const appRouter = createBrowserRouter([
         element: <ContactUsPage />,
       },
       {
+        path: "/signIn",
+        element: <SignUp/>,
+      },
+      {
+        path: "/login",
+        element: <Login/>,
+      },
+      {
         path: "/login",
         element: <AuthModal/>,
       },
@@ -92,6 +104,10 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/",
+        element: <LandingPage />,
+      },
+      {
+        path: "/home",
         element: <Body />,
       },
       {

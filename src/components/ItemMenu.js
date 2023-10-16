@@ -38,14 +38,15 @@ const dispatch=useDispatch();
   // console.log("printing item card", props.itemCard);
   return props.itemCard.map((item, index) => {
     return (
-      <div className="mt-2  w p-3  flex flex-wrap flex-col" key={index}>
-        <div className="flex p-2 justify-between gap-4 ">
+     <div className=" flex ">
+       <div className= " item-menu  mt-2  p-3  flex  flex-col" key={index}>
+        <div className=" flex relative p-2 justify-between gap-4 ">
           <div>
             <div className="text-green-700  text-2xl">
               <CgSquare />
             </div>
             <span className="">
-              <h2 className=" text-gray-600 ml-1 font-serif font-bold">
+              <h2 className=" text-gray-600  ml-1 font-serif font-bold">
                 {item?.card?.info?.name}
               </h2>
             </span>
@@ -74,9 +75,10 @@ const dispatch=useDispatch();
         </div>
         <div className="w-[800px]    h-[3px] bg-[#d3d3df]"></div>
       </div>
+     </div>
     );
 
-    //  CgSquare CgSquare
+  
   });
 };
 
