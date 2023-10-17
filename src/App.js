@@ -29,6 +29,7 @@ import AuthModal from "./components/AuthModal";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import LandingPage from "./components/LandingPage";
+import Carousel from "./components/Carousel";
 // import Shimmer from "./components/Shimmer";
 
 /**
@@ -89,6 +90,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/signIn",
         element: <SignUp/>,
+      },
+      {
+        path: "/carousel",
+        element: <Carousel/>,
       },
       {
         path: "/login",

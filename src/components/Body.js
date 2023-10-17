@@ -4,17 +4,17 @@ import Shimmer from "./Shimmer";
 import { RES_LIST_URL } from "../../config";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
+import { toast } from "react-toastify";
+import useOnline from "../utils/useOnline";
+import "react-toastify/dist/ReactToastify.css";
+import Carousel from "./Carousel.js";
 import {
   addRestaurants,
   filtOnDelTime,
   filtByRating,
   filtByCostByTwo,
 } from "../utils/Slices/AllRestaurantSlics";
-import { toast } from "react-toastify";
-import useOnline from "../utils/useOnline";
-;
-
-import "react-toastify/dist/ReactToastify.css";
 
 //   https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.1119261&lng=79.0878065&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING
 
@@ -69,68 +69,71 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="w-full   bg-white flex flex-col  min-h-screen scroll ">
-      <div className="w-full   h-[500px] bg-black "></div>
+      <div className="w-full   h-[300px] bg-white ">
+        <Carousel />
+      </div>
       {/* <h1 className="text-[100px] flex z-10 text-black">Hello</h1> */}
-     <div className="w-[1200px] mx-auto">
-     <div className=" w-[1200px]   h-[500px]   flex justify-center mt-[100px]">
-        <div className="flex flex-col gap-4 ">
-          <div className=" flex h-[10px] w-[1200px]  text-black "></div>
-          <h1 className="font-bold text-xl ml-3 ">
-            Restaurants With Online Food Delivery In Bangalore
-          </h1>
-          {/* buttons */}
+      <div className="w-[1200px] mt-[80px] mx-auto">
+        <div className=" w-[1200px]   h-[500px]   flex justify-center ">
+          <div className="flex flex-col gap-4 ">
+            <div className=" flex h-[10px] w-[1200px]  text-black "></div>
+            <h1 className="font-bold text-xl ml-3 ">
+              Restaurants With Online Food Delivery In Bangalore
+            </h1>
+            <div className="w-[120px] justify-center flex h-[10px] bg-gray-700"></div>
+            {/* buttons */}
 
-          <div className="flex gap-4 mt-4 ml-5">
-            <div className="w-fit">
-              <button
-                className={`text-center items-center flex p-3 text-[13px] sm:text-[16px] px-6 py- rounded-full h-[30px] border-gray-300 border-[1px] 
+            <div className="flex gap-4 mt-4 ml-5">
+              <div className="w-fit">
+                <button
+                  className={`text-center items-center flex p-3 text-[13px] sm:text-[16px] px-6 py- rounded-full h-[30px] border-gray-300 border-[1px] 
           bg-gray-50 text-black 
       hover:shadow-none hover:scale-95 transition-all duration-200 `}
-              >
-                <div
-                  onClick={() => dispatch(filtOnDelTime())}
-                  className="flex items-center gap-3"
                 >
-                  Fast Delivery
-                </div>
-              </button>
-            </div>
-            <div className="w-fit"></div>
-            <div className="w-fit">
-              <button
-                onClick={() => dispatch(filtByRating())}
-                className={`text-center items-center flex p-3 text-[13px] sm:text-[16px] px-6 py- rounded-full h-[30px] border-gray-300 border-[1px] 
+                  <div
+                    onClick={() => dispatch(filtOnDelTime())}
+                    className="flex items-center gap-3"
+                  >
+                    Fast Delivery
+                  </div>
+                </button>
+              </div>
+              <div className="w-fit"></div>
+              <div className="w-fit">
+                <button
+                  onClick={() => dispatch(filtByRating())}
+                  className={`text-center items-center flex p-3 text-[13px] sm:text-[16px] px-6 py- rounded-full h-[30px] border-gray-300 border-[1px] 
           bg-gray-50 text-black 
       hover:shadow-none hover:scale-95 transition-all duration-200 `}
-              >
-                <div className="flex items-center gap-3">Rating</div>
-              </button>
-            </div>
-            <div className="w-fit">
-              <button
-                onClick={() => dispatch(filtByCostByTwo())}
-                className={`text-center items-center flex p-3 text-[13px] sm:text-[16px] px-6 py- rounded-full h-[30px] border-gray-300 border-[1px] 
+                >
+                  <div className="flex items-center gap-3">Rating</div>
+                </button>
+              </div>
+              <div className="w-fit">
+                <button
+                  onClick={() => dispatch(filtByCostByTwo())}
+                  className={`text-center items-center flex p-3 text-[13px] sm:text-[16px] px-6 py- rounded-full h-[30px] border-gray-300 border-[1px] 
           bg-gray-50 text-black 
       hover:shadow-none hover:scale-95 transition-all duration-200 `}
-              >
-                <div className="flex items-center gap-3">Cost For Two</div>
-              </button>
+                >
+                  <div className="flex items-center gap-3">Cost For Two</div>
+                </button>
+              </div>
             </div>
-          </div>
 
-          {/* Restaurant card */}
-          <div className="flex ml-7  flex-wrap">
-            {allRestaurant.map((restaurant, index) => {
-              return (
-                <Link to={"/restaurant/" + restaurant?.info?.id} key={index}>
-                  <RestaurantCard {...restaurant?.info} />
-                </Link>
-              );
-            })}
+            {/* Restaurant card */}
+            <div className="flex ml-7  flex-wrap">
+              {allRestaurant.map((restaurant, index) => {
+                return (
+                  <Link to={"/restaurant/" + restaurant?.info?.id} key={index}>
+                    <RestaurantCard {...restaurant?.info} />
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
-     </div>
       {/* footer */}
     </div>
   );

@@ -50,7 +50,7 @@ const SearchBar = () => {
         <div className=" mx-auto relative justify-center">
           <input
             type="text"
-            className=" border-[1px] italic appearance-none w-[1000px] text-[#686B78] border-solid border-gray-300 h-10 rounded-md px-3 "
+            className=" border-[1px] italic  w-[1000px] text-[#686B78] border-solid border-gray-300 h-10 rounded-md px-3 "
             placeholder="Let's Heist food..."
             value={searchItem}
             onChange={(e) => {

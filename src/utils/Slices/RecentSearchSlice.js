@@ -7,7 +7,6 @@ const RecentSearchSlice = createSlice({
   },
   reducers: {
     addIntoRecentSearch: (state, action) => {
-      //   state.AllRestItems = state.AllRestItems.concat(action.payload);
       state.RecentSearch = action.payload;
     },
   },
