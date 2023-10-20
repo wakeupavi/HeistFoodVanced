@@ -54,7 +54,7 @@ const SearchBar = () => {
             placeholder="Let's Heist food..."
             value={searchItem}
             onChange={(e) => {
-              (e.target.value.length ===0)?(<div></div>):( setSearchItem(e.target.value));
+              (e.target.value.length ===0 )?(<div></div>):( setSearchItem(e.target.value) || filterData(searchItem));
             }}
           ></input>
           {!(filterRestaurant.length > 0) ? (

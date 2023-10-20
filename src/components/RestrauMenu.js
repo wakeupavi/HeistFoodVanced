@@ -15,18 +15,12 @@ const RestrauMenu = () => {
 
   const catLength = category.length;
 
-  // let array = [];
-  // useEffect(() => {
-  //   function createArray() {
-  //     array = new Array(catLength).fill(true);
-  //   }
-  // }, []);
 
-  // const array=new Array(catLength).fill(false);
-  const array = [];
-  for (let i = 0; i < catLength; i++) {
-    array[i] = false;
-  }
+  const array=new Array(catLength).fill(false);
+  // const array = [];
+  // for (let i = 0; i < catLength; i++) {
+  //   array[i] = false;
+  // }
 
   console.log(array);
   const [arr, setArr] = useState(array);

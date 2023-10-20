@@ -30,7 +30,7 @@ const Cart = () => {
 
   console.log("Cart Item", CartItems);
   return (
-    <div className="bg-gray-200">{
+    <div className="bg-gray-200 mt-[100px]">{
       !(CartItems.length===0)? (
       <div className=" flex flex-col items-center justify-center ">
         <div className="w-[1200px] mb-[300px] sticky top-[100px] mx-auto flex ">

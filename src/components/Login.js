@@ -1,22 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import { setUser } from "../utils/Slices/UserSlics";
 
 const Login = () => {
+  const User = useSelector((store) => store.user.user);
 
-
-    const User = useSelector((store) => store.user.user);
-
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    name:""
+    email: "",
+    password: "",
+    name: "",
   });
 
   const handleChange = (e) => {
@@ -27,12 +25,12 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     toast.info("Logged In", {
-      position: toast.POSITION.TOP_CENTER
-  })
-    const { name, email,password } = formData;
+      position: toast.POSITION.TOP_CENTER,
+    });
+    const { name, email, password } = formData;
     dispatch(setUser(name));
     console.log(formData);
-    navigate("/")
+    navigate("/");
   };
 
   return (
@@ -69,7 +67,10 @@ const Login = () => {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="password" className="block text-gray-700 font-medium">
+            <label
+              htmlFor="password"
+              className="block text-gray-700 font-medium"
+            >
               Password
             </label>
             <input
